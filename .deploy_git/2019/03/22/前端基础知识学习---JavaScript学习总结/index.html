@@ -1,0 +1,1544 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next beep use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="JavaScript基础部分JavaScript简介JavaScript实现JavaScript是一种专门为网页交互设计的脚本语言，有以下三部分组成：  ECMAScript，提供和核心语言功能； 文档对象模型（DOM），提供访问和操作网页内容的方法和接口； 浏览器对象模型（BOM），提供与浏览器交互的方法和接口；  HTML中使用JavaScript">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="前端基础知识学习---JavaScript学习总结">
+<meta property="og:url" content="https://caochenhins.github.io/2019/03/22/前端基础知识学习---JavaScript学习总结/index.html">
+<meta property="og:site_name" content="曹辰的博客">
+<meta property="og:description" content="JavaScript基础部分JavaScript简介JavaScript实现JavaScript是一种专门为网页交互设计的脚本语言，有以下三部分组成：  ECMAScript，提供和核心语言功能； 文档对象模型（DOM），提供访问和操作网页内容的方法和接口； 浏览器对象模型（BOM），提供与浏览器交互的方法和接口；  HTML中使用JavaScript">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-22T12:02:31.162Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="前端基础知识学习---JavaScript学习总结">
+<meta name="twitter:description" content="JavaScript基础部分JavaScript简介JavaScript实现JavaScript是一种专门为网页交互设计的脚本语言，有以下三部分组成：  ECMAScript，提供和核心语言功能； 文档对象模型（DOM），提供访问和操作网页内容的方法和接口； 浏览器对象模型（BOM），提供与浏览器交互的方法和接口；  HTML中使用JavaScript">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Beep',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":6,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://caochenhins.github.io/2019/03/22/前端基础知识学习---JavaScript学习总结/">
+
+
+
+<!-- 文章加密 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+		if (history.length === 1) {
+		    window.opener = null;
+		    window.open('', '_self');
+		    window.close();
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+<!-- fontawesome5 -->
+<link href="/lib/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+
+  <title>前端基础知识学习---JavaScript学习总结 | 曹辰的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <!--<div class="headband">
+	<a href="https://github.com/caochenhins" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/headband/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>-->
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">曹辰的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">跨界设计尸，产品狗，技术宅，美剧痴迷者，音乐重度爱好者…</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-archive"></i> <br>
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fas fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fas fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="far fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+    
+    <!--<a href="https://github.com/caochenhins" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub">
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+	<path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </a>-->
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://caochenhins.github.io/2019/03/22/前端基础知识学习---JavaScript学习总结/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="曹辰">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/getheadimg.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="曹辰的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">前端基础知识学习---JavaScript学习总结</h2>
+        
+
+        <div class="post-meta">
+	  
+	  
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar-plus"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-22T19:42:55+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="far fa-comment-dots"></i>
+                </span>
+                <a href="/2019/03/22/前端基础知识学习---JavaScript学习总结/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/22/前端基础知识学习---JavaScript学习总结/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="far fa-file"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <!--<i class="far fa-file-word"></i>-->
+		  <i class="fas fa-book-open"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文共计 &#58;</span>
+                
+                <span title="本文共计">
+                  3.2k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="far fa-clock"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅文耗时 &asymp;</span>
+                
+                <span title="阅文耗时">
+                  12 min
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="JavaScript基础部分"><a href="#JavaScript基础部分" class="headerlink" title="JavaScript基础部分"></a>JavaScript基础部分</h1><h2 id="JavaScript简介"><a href="#JavaScript简介" class="headerlink" title="JavaScript简介"></a>JavaScript简介</h2><h3 id="JavaScript实现"><a href="#JavaScript实现" class="headerlink" title="JavaScript实现"></a>JavaScript实现</h3><p>JavaScript是一种专门为网页交互设计的脚本语言，有以下三部分组成：</p>
+<ul>
+<li>ECMAScript，提供和核心语言功能；</li>
+<li>文档对象模型（DOM），提供访问和操作网页内容的方法和接口；</li>
+<li>浏览器对象模型（BOM），提供与浏览器交互的方法和接口；</li>
+</ul>
+<h2 id="HTML中使用JavaScript"><a href="#HTML中使用JavaScript" class="headerlink" title="HTML中使用JavaScript"></a>HTML中使用JavaScript</h2><a id="more"></a>
+<h3 id="标签的位置"><a href="#标签的位置" class="headerlink" title="标签的位置"></a>标签的位置</h3><p><code>传统位置将JavaScript放在title后面</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">"UTF-8"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span><span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>由于解析网页的时候按照从上到写的加载原则，只有等所有的JavaScript文件加载成功后页面才能显示，如果JavaScript文件有一处错误，那么整个页面都就是一片空白，因此，位置应该放置与body内容后面，如下：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!--这里放页面内容--&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"../js/index.js"</span>&gt;</span><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h2 id="JavaScript基本概念"><a href="#JavaScript基本概念" class="headerlink" title="JavaScript基本概念"></a>JavaScript基本概念</h2><h3 id="JavaScript语法"><a href="#JavaScript语法" class="headerlink" title="JavaScript语法"></a>JavaScript语法</h3><p><code>严格区分大小写</code></p>
+<p>在ECMAScript中的一切变量，函数名和操作符都严格区分大小写，例如变量名test和Test是两个不同的变量名。</p>
+<p><code>标识符</code></p>
+<p><code>标识符</code>就是指变量，函数，属性的名字，或者函数的参数名，标识符是由满足下列规则组合的一个或者多个字符</p>
+<ul>
+<li>第一个字符必须是一个字母、下划线（_）或者一个美元符号（$）；</li>
+<li>其他字符可以是字母、下划线、美元符号或者数字；</li>
+<li>标识符一般采用驼峰命名法，首字母小写，每一个单词的开头字母大写（规范，不是强制要求）</li>
+</ul>
+<blockquote>
+<p>注意：不能将关键字，保留字，true，false和null用作标识符</p>
+</blockquote>
+<p><code>注释</code></p>
+<p>ECMAScript中有单行注释和块级注释，单行注释以两个斜杠开头，块级注释以一个斜杠加一个星号开头（/*），一个星号加一个斜杠结尾。</p>
+<p><code>语句</code></p>
+<p>ECMAScript语句以一个分号结尾，虽然不加分号也是能运行的，但是不加分号，是浏览器很会帮我们添加分号，这样依赖降低性能，二来，浏览器有时会加错分号的位置，所以，养成良好的代码编写风格，自己加。</p>
+<h3 id="关键字和保留字"><a href="#关键字和保留字" class="headerlink" title="关键字和保留字"></a>关键字和保留字</h3><p>在ECMAScript中具有特定用途的标识符称之为关键字，这些关键字可表示控制语句的开始或者结束，或者用于描述一个变量等，如下：</p>
+<ul>
+<li><code>breake；do；instanceof；typeof；case；else；new；var,catch；finally；return；</code></li>
+<li><code>void；continue；for；switch；while；default；if,throw；delete；in；try；</code></li>
+<li><code>function；this；with；debugger；false；true；null</code></li>
+</ul>
+<p>还存在一些没有特殊用途的标识符，但是以后可能有特殊用途的标识符称之为保留字，如下：</p>
+<ul>
+<li><code>class ；enum；extends；super；const；export；</code></li>
+<li><code>import；implements；le:；private；public；yield；interface；package；protected；static</code></li>
+</ul>
+<blockquote>
+<p>说明：在ES6中已经将let作为关键字定义变量</p>
+</blockquote>
+<h2 id="JavaScript数据类型"><a href="#JavaScript数据类型" class="headerlink" title="JavaScript数据类型"></a>JavaScript数据类型</h2><h3 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h3><p>在ES中，变量是<code>松散类型</code>的，所谓松散类型就是说变量可以保存任何类型的数据，换句话说，这个变量仅仅是一个用于保存值的占位符，使用关键字<code>var</code>，在ES6中推荐使用<code>let</code>关键字；</p>
+<h3 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h3><p>在ES中定义了六种数据类型，其中包含了五种基本数据类型，分别是：<code>String，Number，Boolean，Null，Underfined</code>和一种复杂数据类型<code>Object</code>；</p>
+<h3 id="typeof操作符"><a href="#typeof操作符" class="headerlink" title="typeof操作符"></a>typeof操作符</h3><p>因为在ES中的数据类型是松散类型的，因此需要一种手段来检测变量的数据类型，这个时候就使用<code>typeof</code>，使用该操作符可能返回以下值，分别为：</p>
+<ul>
+<li><code>underfined</code>：表示这个值未定义；</li>
+<li><code>boolean</code>：表示这个值是布尔值；</li>
+<li><code>string</code>：表示这个值是一个字符串；</li>
+<li><code>number</code>：表示这个值是一个数值；</li>
+<li><code>object</code>：表示这个值是一个对象或者null；</li>
+<li><code>function</code>：表示这个值是一个函数；</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = <span class="string">"hello"</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> a);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>.MAX_VALUE * <span class="built_in">Number</span>.MAX_VALUE)<span class="comment">/*返回的是Infinity无穷大*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="Undefined类型"><a href="#Undefined类型" class="headerlink" title="Undefined类型"></a>Undefined类型</h3><p>Undefined类型就只有一个undefined值，在使用var定义变量后，未初始化该变量，那么使用typeof检测，返回的就是undefined，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message;</span><br><span class="line"><span class="built_in">console</span>.log(message)<span class="comment">/*undefined*/</span></span><br><span class="line"><span class="built_in">console</span>.log(message == <span class="literal">undefined</span>);<span class="comment">/*true*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="Null类型"><a href="#Null类型" class="headerlink" title="Null类型"></a>Null类型</h3><p>NULL类型也只有一个NULL值，从逻辑角度看，这个NULL值代表的是一个空对象指针，所以当我们使用<code>typeof null</code>返回的是Object，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> user = <span class="literal">null</span>;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> user);<span class="comment">/*object*/</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：如果定义变量是在将来用于保存对象，那么最好在定义的时候就初始化为NULL</p>
+</blockquote>
+<h3 id="Boolean类型"><a href="#Boolean类型" class="headerlink" title="Boolean类型"></a>Boolean类型</h3><p>Boolean类型有两个值，分别为:true，false；这两个值和数字值没有关系，true并不代表1，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> test = <span class="literal">true</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：Boolean类型的值是区分大小写的，True和False，或者大小写混写都只是代表标识符，不是Boolean值；</p>
+</blockquote>
+<p>虽然Boolean类型的值只有两个，但是在ES中任何类型的值都可以与这两个Boolean值有着等价的值，要将一个值转换为对应的Boolean值，可以调用转型函数<code>Boolean()</code>，如下所示：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> test = <span class="string">"Helo"</span>;</span><br><span class="line"><span class="keyword">var</span> testBoolean = <span class="built_in">Boolean</span>(test);</span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> testBoolean)<span class="comment">/*boolean*/</span></span><br><span class="line"><span class="built_in">console</span>.log(testBoolean);<span class="comment">/*true*/</span></span><br></pre></td></tr></table></figure>
+<p>有关各种数据类型的转换规则如下：</p>
+<ul>
+<li>String类型，非空字符转换为true，空字符串转换为false；</li>
+<li>number类型，任何非零数字值（包括无穷大），转换为true，0和NaN转换为false；</li>
+<li>Object类型，任何对象转换为true，NUL转换为false；</li>
+</ul>
+<p>使用这些转换规则可以更方便的使用if流程语句，例如：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> message = <span class="string">"Hello Word"</span>;</span><br><span class="line"><span class="keyword">if</span>(message)&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">"我执行了。。。"</span>)<span class="comment">/*该行代码会被执行*/</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="Number类型"><a href="#Number类型" class="headerlink" title="Number类型"></a>Number类型</h3><p>ES中Number数据类型包含整数和浮点数值，在JavaScript中可以使用number类型保存正零和负零，正零和负零被认为是相等的。</p>
+<p><code>浮点数值</code></p>
+<p>在JavaScript中浮点数值就是数值中必须包含一个小数点，并且小数点后至少有一位数字，虽然小数点前面可以没有整数，但是不建议这种写法，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> floatN1 = <span class="string">"1.1"</span>;</span><br><span class="line"><span class="keyword">var</span> floatN2 = <span class="string">"0.1"</span>;</span><br><span class="line"><span class="keyword">var</span> floatN3 = <span class="string">".1"</span>;<span class="comment">/*虽有效，但不推荐*/</span></span><br></pre></td></tr></table></figure>
+<p>由于保存浮点数值需要的内存空间是整数的两倍，所以，只要可以将浮点数转换为整数，就会转换为整数，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> floatN1 = <span class="string">"1.0"</span>;</span><br></pre></td></tr></table></figure>
+<p>当然也可以使用科学计数法，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> floatN1 = <span class="number">3.12e7</span>;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：使用浮点数值进行计算会产生误差的问题，所以和钱相关的就不要使用JavaScript计算了。</p>
+</blockquote>
+<p><code>整数数值</code></p>
+<p>由于内存的限制，JavaScript不可能保存最大的数值，所以就有了JavaScript中的最大值和最小值，如果超出这个值就会返回一个Infinity无穷大和-Infinity负无穷，如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>.MIN_VALUE);<span class="comment">/*5e-324*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>.MAX_VALUE);<span class="comment">/*1.7976931348623157e+308*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="非数值NAN"><a href="#非数值NAN" class="headerlink" title="非数值NAN"></a>非数值NAN</h3><p>NAN,是一个特殊的数值，表示一个本来应该返回数值的操作却没有返回数值的情况，例如任何数值除以非数值就会返回NAN，但是在其他编程语言中就会保存，就是程序的运行。有关非数值NAN需要注意以下几点：</p>
+<ul>
+<li>任何涉及到NAN的操作都会返回NAN,例如NAN/10;</li>
+<li>任何数值和NAN都不相等，包括NAN本身；</li>
+</ul>
+<p>在JavaScript中针对NAN的特殊性，定义了<code>isNaN()函数</code>，这个函数接受一个参数，该参数可以是任何类型，这个函数可以帮我们确定这个参数是否是<code>不是数值</code>，这个函数接收一个参数后，会尝试将这个参数转换为数值类型，不能被转换的就会返回false，否则返回true，如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="literal">NaN</span>));<span class="comment">/*true*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="number">10</span>));<span class="comment">/*false*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="string">"10"</span>));<span class="comment">/*false*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="string">"hello"</span>));<span class="comment">/*true*/</span></span><br><span class="line">			<span class="built_in">console</span>.log(<span class="built_in">isNaN</span>(<span class="literal">true</span>));<span class="comment">/*false*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="数值转换"><a href="#数值转换" class="headerlink" title="数值转换"></a>数值转换</h3><p>在JavaScript中有三个函数可以将非数值转换为数值类型，分别是：<code>Number()、parseInt()和parseFloat()</code>,其中Number()函数可以用于任何数据类型，而其他两个用于将字符串转换为数值，三个函数对于同样的输入却有不同的输出，具体的转换规则如下：</p>
+<p><code>Number()函数的转换规则</code></p>
+<ul>
+<li>如果是Boolean值，则true和false分别转换为1和0；</li>
+<li>如果是数字值，就只是简单的传入和返回；</li>
+<li>如果是NULL，返回的是0；</li>
+<li>如果是undefined，返回的是NAN；</li>
+<li>如果是字符串，具体转换如下：<ul>
+<li>如果字符串只包含数字（包括前面的正负号），则将其转换为十进制数值；</li>
+<li>如果字符串包含有效的浮点格式，就会转换为对应的浮点数值；</li>
+<li>如果字符串包含有效的十六进制格式，就会转换为相同大小的十进制数值；</li>
+<li>如果字符串是空字符串，则转换为数值0；</li>
+<li>如果字符串不是以上类型的格式，就会转换为NaN；</li>
+</ul>
+</li>
+<li>如果是对象，则调用对象的valueOf()方法，然后按照上述的规则转换，如果转换结果为NaN，则调用对象的toString()方法，然后再按照上述规则转换；</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"hello word"</span>))<span class="comment">/*NaN*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">""</span>))<span class="comment">/*0*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="string">"0000011"</span>))<span class="comment">/*11*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">Number</span>(<span class="literal">true</span>))<span class="comment">/*1*/</span></span><br></pre></td></tr></table></figure>
+<p><code>parsenInt()函数转换规则</code></p>
+<ul>
+<li>parsenInt()函数在转换数值的时候，注重的是看是否复合数值模式，它会忽略字符串前面的空格，直至找到第一个非空字符串，如果第一个字符串不是数字或者正负号，就返回NaN；</li>
+<li>对空字符串，返回的是NaN,<code>Number函数对于空字符串返回的是0</code></li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"1234hello"</span>));<span class="comment">/*1234*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">""</span>));<span class="comment">/*NaN*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"0xA"</span>));<span class="comment">/*十六进制：10*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"22.5"</span>));<span class="comment">/*22*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"070"</span>));<span class="comment">/*八进制：70*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"70"</span>));<span class="comment">/*十进制：70*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseInt</span>(<span class="string">"0xf"</span>));<span class="comment">/*十六进制：15*/</span></span><br></pre></td></tr></table></figure>
+<p><code>parseFloat函数转换规则</code></p>
+<ul>
+<li>从第一个字符开始解析，直到解析到字符串末尾结束，或者遇见一个无效的浮点数字字符位置；</li>
+<li>字符串中的第一个小数点是有效的，第二个小数点是无效的；</li>
+<li>如果字符串包含的是一个可解析为整数的数，则会返回整数；</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">"1234hello"</span>));<span class="comment">/*1234*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">"0xA"</span>));<span class="comment">/*0*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">"22.5"</span>));<span class="comment">/*22.5*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">"22.34.45"</span>));<span class="comment">/*22.34*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">"0986.6"</span>));<span class="comment">/*986.6*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">parseFloat</span>(<span class="string">"3.144e7"</span>));<span class="comment">/*31440000*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="String类型"><a href="#String类型" class="headerlink" title="String类型"></a>String类型</h3><p>string类型用于表示由零个或者多个16位Unicode字符组成的字符串序列，就是字符串，在JavaScript中字符串可以使用单引号和双引号，但是不可混用。</p>
+<p><code>转义字符</code></p>
+<ul>
+<li><code>\n</code>：表示换行，<code>\t</code>：表示制表符，<code>\b</code>：表示退格，<code>\r</code>：表示回车</li>
+<li><code>\\</code>:表示斜杠，<code>\&#39;</code>：表示单引号，<code>\&quot;</code>：表示双引号</li>
+</ul>
+<blockquote>
+<p>说明：任何字符串可以通过length属性获取字符串的长度，例如：<code>text.length</code></p>
+</blockquote>
+<p><code>字符串的特点</code></p>
+<p>在JavaScript中字符串是不可变的，换句话说，就是字符一旦创建，他的值就不能改变，要改变某一个变量的字符串，就要先销毁原来的字符串，在创建一个新的字符串值填充该变量。</p>
+<p><code>转换为字符串</code></p>
+<ul>
+<li>调用toString()方法；例如数值，布尔值，对象和字符串值都有toString方法；null和undefined没toString方法；</li>
+<li>使用String()转型函数，</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> num = <span class="number">10</span>;</span><br><span class="line"><span class="built_in">console</span>.log(num.toString());<span class="comment">/*"10"*/</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">2</span>));<span class="comment">/*按照二进制转换："1010"*/</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">8</span>));<span class="comment">/*按照八进制转换："12"*/</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">10</span>));<span class="comment">/*按照十进制转换："10"*/</span></span><br><span class="line"><span class="built_in">console</span>.log(num.toString(<span class="number">16</span>));<span class="comment">/*按照十六进制转换："a"*/</span></span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>注意：调用toString方法可以指定基数，转换成不同的字符串</p>
+</blockquote>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> value;</span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="number">10</span>));<span class="comment">/*"10"*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">true</span>));<span class="comment">/*"true"*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(<span class="literal">null</span>));<span class="comment">/*"null"*/</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="built_in">String</span>(value));<span class="comment">/*"undefined"*/</span></span><br></pre></td></tr></table></figure>
+<h3 id="Object类型"><a href="#Object类型" class="headerlink" title="Object类型"></a>Object类型</h3><p>在JavaScript中<code>对象是一组数据和功能的集合</code>，对象通过new的方式创建，例如<code>var u = new Object()</code>，Object类型是所有它的实例的基础，也就是说，Object具有的任何属性和方法也都存在与具体的对象中，和java中的Object对象一样，Object具有的属性和方法如下：</p>
+<ul>
+<li>constructor：保存着用于创建当前对象的函数，构造函数constructor就是Object()；</li>
+<li>hasOwnProperty（propertyName）：用于检查给定的属性在当前对象实例中是否存在；</li>
+<li>isPrototypeOf(object)：用于检查传入的对象是否是当前对象的原型；</li>
+<li>propertyIsEnumerable(propertyName)：用于检查给定的属性能否使用for-in语句来枚举；</li>
+<li>toLocaleString()：返回对象的字符串表示；</li>
+<li>toString()：返回对象的字符串表示；</li>
+<li>valueOf()：返回对象的字符串、数值或者布尔值。</li>
+</ul>
+<h2 id="JavaScript操作符"><a href="#JavaScript操作符" class="headerlink" title="JavaScript操作符"></a>JavaScript操作符</h2><h3 id="一元操作符"><a href="#一元操作符" class="headerlink" title="一元操作符"></a>一元操作符</h3>
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode_for_gh_dfc33bc3270f_258.jpg" alt="曹辰 wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎关注微信公共号 summerhins <br>不经常抽风性更新 | 挨踢民工 | 爱数码产品 | 爱黑莓 | 爱苹果 | 美剧痴迷者 | 音乐重度爱好者 | 高清下载控 | 不折腾不舒服 | 纠结 | 失眠 | EQ=0</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>真诚赞赏，手留余香</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/微信图片_20190320223941.jpg" alt="曹辰 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/微信图片_20190320224051.jpg" alt="曹辰 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fas fa-tag"></i> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div>
+	  <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    曹辰
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://caochenhins.github.io/2019/03/22/前端基础知识学习---JavaScript学习总结/" title="前端基础知识学习---JavaScript学习总结">https://caochenhins.github.io/2019/03/22/前端基础知识学习---JavaScript学习总结/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章均采用 <a href="https://github.com/caochenhins" rel="external nofollow" target="_blank">OPEN</a> 许可协议，转载请注明出处！
+  </li>
+</ul>
+
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/22/前端基础知识学习---JavaScript高级学习总结/" rel="next" title="前端基础知识学习---JavaScript高级学习总结">
+                <i class="fas fa-chevron-left"></i> 前端基础知识学习---JavaScript高级学习总结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/22/JavaEE进阶知识学习-----PostgreSQL学习总结/" rel="prev" title="JavaEE进阶知识学习-----PostgreSQL学习总结">
+                JavaEE进阶知识学习-----PostgreSQL学习总结 <i class="fas fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+	        <img class="site-author-image" itemprop="image" src="/images/getheadimg.png" alt="曹辰">
+            
+              <p class="site-author-name" itemprop="name">曹辰</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">132</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/caochenhins" target="_blank" title="GitHub">
+                      
+		      
+			<i class="fa-fw fab fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ipod_nano@qq.com" target="_blank" title="E-Mail">
+                      
+		      
+			<i class="fa-fw fas fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/caochenhins" target="_blank" title="CSDN">
+                      
+		      
+			<i class="fa-fw fab fa-cuttlefish"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.cnblogs.com/hins/" target="_blank" title="博客园">
+                      
+		      
+			<i class="fa-fw fas fa-book"></i>博客园</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript基础部分"><span class="nav-number">1.</span> <span class="nav-text">JavaScript基础部分</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript简介"><span class="nav-number">1.1.</span> <span class="nav-text">JavaScript简介</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript实现"><span class="nav-number">1.1.1.</span> <span class="nav-text">JavaScript实现</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML中使用JavaScript"><span class="nav-number">1.2.</span> <span class="nav-text">HTML中使用JavaScript</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#标签的位置"><span class="nav-number">1.2.1.</span> <span class="nav-text">标签的位置</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript基本概念"><span class="nav-number">1.3.</span> <span class="nav-text">JavaScript基本概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#JavaScript语法"><span class="nav-number">1.3.1.</span> <span class="nav-text">JavaScript语法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关键字和保留字"><span class="nav-number">1.3.2.</span> <span class="nav-text">关键字和保留字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript数据类型"><span class="nav-number">1.4.</span> <span class="nav-text">JavaScript数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">1.4.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据类型"><span class="nav-number">1.4.2.</span> <span class="nav-text">数据类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#typeof操作符"><span class="nav-number">1.4.3.</span> <span class="nav-text">typeof操作符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Undefined类型"><span class="nav-number">1.4.4.</span> <span class="nav-text">Undefined类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Null类型"><span class="nav-number">1.4.5.</span> <span class="nav-text">Null类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Boolean类型"><span class="nav-number">1.4.6.</span> <span class="nav-text">Boolean类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Number类型"><span class="nav-number">1.4.7.</span> <span class="nav-text">Number类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#非数值NAN"><span class="nav-number">1.4.8.</span> <span class="nav-text">非数值NAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值转换"><span class="nav-number">1.4.9.</span> <span class="nav-text">数值转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#String类型"><span class="nav-number">1.4.10.</span> <span class="nav-text">String类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Object类型"><span class="nav-number">1.4.11.</span> <span class="nav-text">Object类型</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#JavaScript操作符"><span class="nav-number">1.5.</span> <span class="nav-text">JavaScript操作符</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一元操作符"><span class="nav-number">1.5.1.</span> <span class="nav-text">一元操作符</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fas fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">曹辰</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fas fa-chart-area"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站共计字数&#58;</span>
+    
+    <span title="全站共计字数">317.8k</span>
+  
+</div>
+
+
+
+
+
+
+
+<!--
+  <div class="footer-custom">Hosted by <a href="https://pages.coding.me" style="font-weight:bold">Coding Pages</a> & <a target="_blank" href="https://pages.github.com" style="font-weight:bold">GitHub Pages</a></div>
+-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fas fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fas fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    <div class="sidebar_wo">
+      <div id="leimu">
+        <img src="/images/b2t/leimuA.png" alt="雷姆" onmouseover="this.src='/images/b2t/leimuB.png'" onmouseout="this.src='/images/b2t/leimuA.png'" title="回到顶部">
+      </div>
+      <div class="sidebar_wo" id="lamu">
+        <img src="/images/b2t/lamuA.png" alt="雷姆" onmouseover="this.src='/images/b2t/lamuB.png'" onmouseout="this.src='/images/b2t/lamuA.png'" title="回到底部">
+      </div>
+    </div>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname.substring(window.location.pathname.length-15,window.location.pathname.length), 
+            owner: 'caochenhins',
+            repo: 'caochenhins.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '5ce0e65489e1f2cf20d40af22f574edc5d7396d4',
+            
+                client_id: '3e213716c71ed6f28dc0'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fas fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="far fa-frown fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+<!-- 图片轮播js文件cdn -->
+<script src="https://cdn.bootcss.com/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+
+<!-- 剪贴板js文件 -->
+<script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>
+
+<script>
+
+<!-- 头像挂件及自动刷新 -->
+
+
+</script>
+
+<!-- 自定义的js文件 -->
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>

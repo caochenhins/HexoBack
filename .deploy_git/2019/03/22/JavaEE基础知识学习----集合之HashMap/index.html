@@ -1,0 +1,1443 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next beep use-motion" lang="zh-Hans">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-flash.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+  
+
+<link href="https://cdn.bootcss.com/font-awesome/4.6.2/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Java,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="HashMap基本知识概述 Map与Collection并列存在，Map用于保存具有映射关系的数据。 Map中的key和value都是可以是任何引用类型的数据。key和value存在单向一对一的关系。 Map接口的实现类有HashTable，HashMap等。 常用String类来作为Map中的key。 HashMap是Map接口的实现类，继承了AbstractMap类，以key-value的形式">
+<meta name="keywords" content="Java">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaEE基础知识学习----集合之HashMap">
+<meta property="og:url" content="https://caochenhins.github.io/2019/03/22/JavaEE基础知识学习----集合之HashMap/index.html">
+<meta property="og:site_name" content="曹辰的博客">
+<meta property="og:description" content="HashMap基本知识概述 Map与Collection并列存在，Map用于保存具有映射关系的数据。 Map中的key和value都是可以是任何引用类型的数据。key和value存在单向一对一的关系。 Map接口的实现类有HashTable，HashMap等。 常用String类来作为Map中的key。 HashMap是Map接口的实现类，继承了AbstractMap类，以key-value的形式">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-03-22T12:37:39.073Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaEE基础知识学习----集合之HashMap">
+<meta name="twitter:description" content="HashMap基本知识概述 Map与Collection并列存在，Map用于保存具有映射关系的数据。 Map中的key和value都是可以是任何引用类型的数据。key和value存在单向一对一的关系。 Map接口的实现类有HashTable，HashMap等。 常用String类来作为Map中的key。 HashMap是Map接口的实现类，继承了AbstractMap类，以key-value的形式">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Beep',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"always","offset":6,"b2t":false,"scrollpercent":true,"onmobile":true},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://caochenhins.github.io/2019/03/22/JavaEE基础知识学习----集合之HashMap/">
+
+
+
+<!-- 文章加密 -->
+<script>
+    (function(){
+        if(''){
+            if (prompt('请输入文章密码') !== ''){
+                alert('密码错误！');
+		if (history.length === 1) {
+		    window.opener = null;
+		    window.open('', '_self');
+		    window.close();
+                } else {
+                    history.back();
+                }
+            }
+        }
+    })();
+</script>
+
+<!-- fontawesome5 -->
+<link href="/lib/font-awesome/css/fontawesome-all.min.css" rel="stylesheet" type="text/css">
+
+  <title>JavaEE基础知识学习----集合之HashMap | 曹辰的博客</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <!--<div class="headband">
+	<a href="https://github.com/caochenhins" target="_blank"><img style="position: absolute; top: 0; right: 0; border: 0;" src="/images/headband/forkme_right_red.png" alt="Fork me on GitHub"></a>
+    </div>-->
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">曹辰的博客</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <h1 class="site-subtitle" itemprop="description">跨界设计尸，产品狗，技术宅，美剧痴迷者，音乐重度爱好者…</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-home"></i> <br>
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-archive"></i> <br>
+            
+            文章
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-th"></i> <br>
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-tags"></i> <br>
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa-fw fas fa-user"></i> <br>
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fas fa-search fa-fw"></i> <br>
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fas fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="far fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+    
+    <!--<a href="https://github.com/caochenhins" class="github-corner" target="_blank" title="Follow me on GitHub" aria-label="Follow me on GitHub">
+      <svg width="80" height="80" viewBox="0 0 250 250" style="fill:#222; color:#fff; position: absolute; top: 0; border: 0; right: 0;" aria-hidden="true">
+        <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path>
+	<path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path>
+      </svg>
+    </a>-->
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://caochenhins.github.io/2019/03/22/JavaEE基础知识学习----集合之HashMap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="曹辰">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/getheadimg.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="曹辰的博客">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">JavaEE基础知识学习----集合之HashMap</h2>
+        
+
+        <div class="post-meta">
+	  
+	  
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar-plus"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-22T19:42:54+08:00">
+                2019-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <span class="post-meta-item-icon">
+                  <i class="far fa-comment-dots"></i>
+                </span>
+                <a href="/2019/03/22/JavaEE基础知识学习----集合之HashMap/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count gitment-comments-count" data-xid="/2019/03/22/JavaEE基础知识学习----集合之HashMap/" itemprop="commentsCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+          
+
+          
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="far fa-file"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv"></span>
+            </span>
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <!--<i class="far fa-file-word"></i>-->
+		  <i class="fas fa-book-open"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">本文共计 &#58;</span>
+                
+                <span title="本文共计">
+                  2.4k 字
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="far fa-clock"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅文耗时 &asymp;</span>
+                
+                <span title="阅文耗时">
+                  11 min
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="HashMap基本知识"><a href="#HashMap基本知识" class="headerlink" title="HashMap基本知识"></a>HashMap基本知识</h2><h3 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h3><ul>
+<li>Map与Collection并列存在，Map用于保存具有映射关系的数据。</li>
+<li>Map中的key和value都是可以是任何引用类型的数据。key和value存在单向一对一的关系。</li>
+<li>Map接口的实现类有HashTable，HashMap等。</li>
+<li>常用String类来作为Map中的key。</li>
+<li>HashMap是Map接口的实现类，继承了AbstractMap类，以key-value的形式存在，系统根据hash算法来计算key-value的存储位置。</li>
+<li>HashMap中key用Set来存放，key不允许重复，value是用Collection存放，可重复，一个key-value对，就是一个Entry,所有的Entry是用Set存放，不可重复。</li>
+<li>如果key用自定义的类，那么自定义的类就必须重写equals方法和hashCode方法。<h3 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>说明：hashMap这个map的key是String类型的，value是Object类型的。</p>
+<h3 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h3><h4 id="1-Object-put-Object-key-Object-value-添加方法"><a href="#1-Object-put-Object-key-Object-value-添加方法" class="headerlink" title="1.Object put(Object key,Object value);添加方法"></a>1.Object put(Object key,Object value);添加方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;Object,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="string">"张三"</span>);</span><br><span class="line">	hashMap.put(<span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	hashMap.put(<span class="keyword">new</span> Person(<span class="string">"孙悟空"</span>, <span class="number">5000</span>), <span class="string">"美猴王"</span>);</span><br><span class="line">	hashMap.put(<span class="keyword">new</span> Person(<span class="string">"孙悟空"</span>, <span class="number">5000</span>), <span class="string">"七天大圣"</span>);</span><br><span class="line">	System.out.println(hashMap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="说明："><a href="#说明：" class="headerlink" title="说明："></a>说明：</h4><ul>
+<li>HashMap可以放入null的键值对。</li>
+<li>HashMap的key是不允许重复的，如果用自定义的类做key,那么就必须重写equals和hashCode方法。</li>
+<li>如果添加两个相同的key,后面的会替换前面的。<h4 id="2-Object-remove-Object-key-移除方法"><a href="#2-Object-remove-Object-key-移除方法" class="headerlink" title="2.Object remove(Object key);移除方法"></a>2.Object remove(Object key);移除方法</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">12</span>) );</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	hashMap.remove(<span class="string">"BB"</span>);</span><br><span class="line">	System.out.println(hashMap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="3-void-putAll-Map-t-添加一个map"><a href="#3-void-putAll-Map-t-添加一个map" class="headerlink" title="3.void putAll(Map t);添加一个map"></a>3.void putAll(Map t);添加一个map</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">12</span>) );</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap2 = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap2.put(<span class="string">"CC"</span>, <span class="keyword">new</span> Person(<span class="string">"孙悟空"</span>, <span class="number">500</span>));</span><br><span class="line">	hashMap2.put(<span class="string">"DD"</span>, <span class="keyword">new</span> Person(<span class="string">"嫦娥"</span>, <span class="number">700</span>));</span><br><span class="line">	hashMap.putAll(hashMap2);</span><br><span class="line">	System.out.println(hashMap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-void-clear-清除数据"><a href="#4-void-clear-清除数据" class="headerlink" title="4.void clear();清除数据"></a>4.void clear();清除数据</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">12</span>) );</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	hashMap.clear();</span><br><span class="line">	System.out.println(hashMap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="5-Object-get-Object-key-根据key取出value"><a href="#5-Object-get-Object-key-根据key取出value" class="headerlink" title="5.Object get(Object key);根据key取出value"></a>5.Object get(Object key);根据key取出value</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">12</span>) );</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	Person person = (Person) hashMap.get(<span class="string">"AA"</span>);</span><br><span class="line">	System.out.println(person.name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="6-boolean-containsKey-Object-key-是否包含这个key，这里返回false。"><a href="#6-boolean-containsKey-Object-key-是否包含这个key，这里返回false。" class="headerlink" title="6.boolean containsKey(Object key);是否包含这个key，这里返回false。"></a>6.boolean containsKey(Object key);是否包含这个key，这里返回false。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">12</span>) );</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	<span class="keyword">boolean</span> containsKey = hashMap.containsKey(<span class="string">"aa"</span>);</span><br><span class="line">	System.out.println(containsKey);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="7-boolean-containsValue-Object-value-HasHMap是否包含这个value"><a href="#7-boolean-containsValue-Object-value-HasHMap是否包含这个value" class="headerlink" title="7.boolean containsValue(Object value);HasHMap是否包含这个value"></a>7.boolean containsValue(Object value);HasHMap是否包含这个value</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">12</span>) );</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	hashMap.put(<span class="string">"CC"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">14</span>));</span><br><span class="line">	<span class="keyword">boolean</span> containsValue = hashMap.containsValue(<span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">14</span>));</span><br><span class="line">	System.out.println(containsValue);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="说明：-1"><a href="#说明：-1" class="headerlink" title="说明："></a>说明：</h4><blockquote>
+<p>自定义类做key就必须重写equals方法，这里如果不重写就返回false，否则就返回true。</p>
+</blockquote>
+<h4 id="8-int-size-输出HashMap中键值对的个数。"><a href="#8-int-size-输出HashMap中键值对的个数。" class="headerlink" title="8.int size();输出HashMap中键值对的个数。"></a>8.int size();输出HashMap中键值对的个数。</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;String,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>, <span class="number">12</span>) );</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>, <span class="number">13</span>));</span><br><span class="line">	hashMap.put(<span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	<span class="keyword">int</span> size = hashMap.size();</span><br><span class="line">	System.out.println(size);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="说明：-2"><a href="#说明：-2" class="headerlink" title="说明："></a>说明：</h4><p>这里是3，其中hashMap.put(“BB”, new Person(“李四”, 13));重复添加。</p>
+<h4 id="9-boolean-isEmpty-判断HashMap是否为空"><a href="#9-boolean-isEmpty-判断HashMap是否为空" class="headerlink" title="9.boolean isEmpty();判断HashMap是否为空"></a>9.boolean isEmpty();判断HashMap是否为空</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;Object,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="string">"张三"</span>);</span><br><span class="line">	hashMap.put(<span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line">	hashMap.isEmpty();</span><br><span class="line">	System.out.println(hashMap);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="10-boolean-equals-Object-obj-比较两个Map是否相同"><a href="#10-boolean-equals-Object-obj-比较两个Map是否相同" class="headerlink" title="10.boolean equals(Object obj);比较两个Map是否相同"></a>10.boolean equals(Object obj);比较两个Map是否相同</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;Object,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>,<span class="number">12</span>));</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>,<span class="number">13</span>));</span><br><span class="line">	HashMap&lt;Object,Object&gt; hashMap2 = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">	hashMap2.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>,<span class="number">12</span>));</span><br><span class="line">	<span class="keyword">boolean</span> equals = hashMap.equals(hashMap2);</span><br><span class="line">	System.out.println(equals);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="11-Set-keySet-遍历HashMap中的所有Key"><a href="#11-Set-keySet-遍历HashMap中的所有Key" class="headerlink" title="11.Set keySet();遍历HashMap中的所有Key"></a>11.Set keySet();遍历HashMap中的所有Key</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;Object,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>,<span class="number">12</span>));</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>,<span class="number">13</span>));</span><br><span class="line">	hashMap.put(<span class="string">"CC"</span>, <span class="keyword">new</span> Person(<span class="string">"王五"</span>,<span class="number">14</span>));</span><br><span class="line">	hashMap.put(<span class="string">"DD"</span>, <span class="keyword">new</span> Person(<span class="string">"陈六"</span>,<span class="number">14</span>));</span><br><span class="line">	Set&lt;Object&gt; entrySet = hashMap.keySet();</span><br><span class="line">	<span class="keyword">for</span> (Object entry : entrySet) &#123;</span><br><span class="line">		System.out.println(entry);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="12-Collection-values-遍历HashMap中的value"><a href="#12-Collection-values-遍历HashMap中的value" class="headerlink" title="12.Collection values();遍历HashMap中的value"></a>12.Collection values();遍历HashMap中的value</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;Object,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>,<span class="number">12</span>));</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>,<span class="number">13</span>));</span><br><span class="line">	hashMap.put(<span class="string">"CC"</span>, <span class="keyword">new</span> Person(<span class="string">"王五"</span>,<span class="number">14</span>));</span><br><span class="line">	hashMap.put(<span class="string">"DD"</span>, <span class="keyword">new</span> Person(<span class="string">"陈六"</span>,<span class="number">14</span>));</span><br><span class="line">	Collection&lt;Object&gt; values = hashMap.values();</span><br><span class="line">	<span class="comment">//values的遍历方式一</span></span><br><span class="line">	<span class="keyword">for</span> (Object object : values) &#123;</span><br><span class="line">		System.out.println(object);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//values的遍历方式二</span></span><br><span class="line">	Iterator&lt;Object&gt; iterator = values.iterator();</span><br><span class="line">	<span class="keyword">while</span>(iterator.hasNext())&#123;</span><br><span class="line">		System.out.println(iterator.next());</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="13-Set-entrySet-遍历HashMap的键值对"><a href="#13-Set-entrySet-遍历HashMap的键值对" class="headerlink" title="13.Set entrySet();遍历HashMap的键值对"></a>13.Set entrySet();遍历HashMap的键值对</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">	HashMap&lt;Object,Object&gt; hashMap = <span class="keyword">new</span> HashMap&lt;Object, Object&gt;();</span><br><span class="line">	hashMap.put(<span class="string">"AA"</span>, <span class="keyword">new</span> Person(<span class="string">"张三"</span>,<span class="number">12</span>));</span><br><span class="line">	hashMap.put(<span class="string">"BB"</span>, <span class="keyword">new</span> Person(<span class="string">"李四"</span>,<span class="number">13</span>));</span><br><span class="line">	hashMap.put(<span class="string">"CC"</span>, <span class="keyword">new</span> Person(<span class="string">"王五"</span>,<span class="number">14</span>));</span><br><span class="line">	hashMap.put(<span class="string">"DD"</span>, <span class="keyword">new</span> Person(<span class="string">"陈六"</span>,<span class="number">14</span>));</span><br><span class="line">	Set&lt;Entry&lt;Object,Object&gt;&gt; entrySet = hashMap.entrySet();</span><br><span class="line">	<span class="keyword">for</span> (Entry&lt;Object, Object&gt; entry : entrySet) &#123;</span><br><span class="line">		System.out.println(entry);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><ul>
+<li>HashMap 判断两个 key 相等的标准是：两个 key 通过 equals() 方法返回 true，hashCode 值也相等。</li>
+<li>HashMap 判断两个 value相等的标准是：两个 value 通过 equals() 方法返回 true。<h2 id="HashMap底层实现原理"><a href="#HashMap底层实现原理" class="headerlink" title="HashMap底层实现原理"></a>HashMap底层实现原理</h2>在HashMap的源码中我们可以看出HashMap是一个数组和链表结合的一种数据结构，<h3 id="1-HashMap属性"><a href="#1-HashMap属性" class="headerlink" title="1.HashMap属性"></a>1.HashMap属性</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">transient</span> Entry[] table;</span><br><span class="line"><span class="keyword">static</span> <span class="class"><span class="keyword">class</span> <span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; <span class="keyword">implements</span> <span class="title">Map</span>.<span class="title">Entry</span>&lt;<span class="title">K</span>,<span class="title">V</span>&gt; </span>&#123;</span><br><span class="line">	<span class="keyword">final</span> K key;</span><br><span class="line">	V value;</span><br><span class="line">	Entry&lt;K,V&gt; next;</span><br><span class="line">	<span class="keyword">final</span> <span class="keyword">int</span> hash;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>可以看出，HashMap底层是一个数组，数据中的每一个元素就是Entry类型，Entry又是一个链表结构。</p>
+<h3 id="2-HashMap构造方法"><a href="#2-HashMap构造方法" class="headerlink" title="2.HashMap构造方法"></a>2.HashMap构造方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//构建一个初始容量为16，负载因子为0.75的HashMap。</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">this</span>.loadFactor = DEFAULT_LOAD_FACTOR;</span><br><span class="line">	threshold = (<span class="keyword">int</span>)(DEFAULT_INITIAL_CAPACITY * DEFAULT_LOAD_FACTOR);</span><br><span class="line">	table = <span class="keyword">new</span> Entry[DEFAULT_INITIAL_CAPACITY];</span><br><span class="line">	init();</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//构建一个指定容量和负载因子的HashMap</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="title">HashMap</span><span class="params">(<span class="keyword">int</span> initialCapacity, <span class="keyword">float</span> loadFactor)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> (initialCapacity &lt; <span class="number">0</span>)</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal initial capacity: "</span> +</span><br><span class="line">											initialCapacity);</span><br><span class="line">	<span class="keyword">if</span> (initialCapacity &gt; MAXIMUM_CAPACITY)</span><br><span class="line">		initialCapacity = MAXIMUM_CAPACITY;</span><br><span class="line">	<span class="keyword">if</span> (loadFactor &lt;= <span class="number">0</span> || Float.isNaN(loadFactor))</span><br><span class="line">		<span class="keyword">throw</span> <span class="keyword">new</span> IllegalArgumentException(<span class="string">"Illegal load factor: "</span> +</span><br><span class="line">											loadFactor);</span><br><span class="line"></span><br><span class="line">	<span class="comment">// Find a power of 2 &gt;= initialCapacity</span></span><br><span class="line">	<span class="keyword">int</span> capacity = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span> (capacity &lt; initialCapacity)</span><br><span class="line">		capacity &lt;&lt;= <span class="number">1</span>;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">this</span>.loadFactor = loadFactor;</span><br><span class="line">	threshold = (<span class="keyword">int</span>)(capacity * loadFactor);</span><br><span class="line">	table = <span class="keyword">new</span> Entry[capacity];</span><br><span class="line">	init();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="说明：-3"><a href="#说明：-3" class="headerlink" title="说明："></a>说明：</h4><ul>
+<li>HashMap的容量就是底层table数组的长度。</li>
+<li>负载因子：散列表的实际元素数目/散列表的容量，负载因子衡量的是一个散列表的空间使用程度，值越大代表装填程度越高，反之越小，如果负载因子越大代表空间利用充分，但是查询，搜索效率就降低，过小，空间利用率就降低，<h3 id="3-添加数据方法"><a href="#3-添加数据方法" class="headerlink" title="3.添加数据方法"></a>3.添加数据方法</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br></pre></td><td class="code"><pre><span class="line">	<span class="function"><span class="keyword">public</span> V <span class="title">put</span><span class="params">(K key, V value)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//判断key是否为空</span></span><br><span class="line">	<span class="keyword">if</span> (key == <span class="keyword">null</span>)</span><br><span class="line">		<span class="keyword">return</span> putForNullKey(value);</span><br><span class="line">	<span class="comment">//根据key的hashcode值来计算hash值。</span></span><br><span class="line">	<span class="keyword">int</span> hash = hash(key.hashCode());</span><br><span class="line">	<span class="keyword">int</span> i = indexFor(hash, table.length);</span><br><span class="line">	<span class="comment">//如果索引i出的Entry不为null，通过循环遍历e的下一个元素</span></span><br><span class="line">	<span class="keyword">for</span> (Entry&lt;K,V&gt; e = table[i]; e != <span class="keyword">null</span>; e = e.next) &#123;</span><br><span class="line">		Object k;</span><br><span class="line">		<span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k))) &#123;</span><br><span class="line">			V oldValue = e.value;</span><br><span class="line">			e.value = value;</span><br><span class="line">			e.recordAccess(<span class="keyword">this</span>);</span><br><span class="line">			<span class="keyword">return</span> oldValue;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//如果索引i出的Entry为null,说明此处没有Entry</span></span><br><span class="line">	modCount++;</span><br><span class="line">	<span class="comment">//将key-value放在次索引处</span></span><br><span class="line">	addEntry(hash, key, value, i);</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line">	<span class="comment">//如果key为空就将value放在数组的第一个位置</span></span><br><span class="line">	<span class="function"><span class="keyword">private</span> V <span class="title">putForNullKey</span><span class="params">(V value)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (Entry&lt;K,V&gt; e = table[<span class="number">0</span>]; e != <span class="keyword">null</span>; e = e.next) &#123;</span><br><span class="line">		<span class="keyword">if</span> (e.key == <span class="keyword">null</span>) &#123;</span><br><span class="line">			V oldValue = e.value;</span><br><span class="line">			e.value = value;</span><br><span class="line">			e.recordAccess(<span class="keyword">this</span>);</span><br><span class="line">			<span class="keyword">return</span> oldValue;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	modCount++;</span><br><span class="line">	addEntry(<span class="number">0</span>, <span class="keyword">null</span>, value, <span class="number">0</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//计算hashcode的</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">int</span> <span class="title">hashCode</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> (key==<span class="keyword">null</span>   ? <span class="number">0</span> : key.hashCode()) ^</span><br><span class="line">				(value==<span class="keyword">null</span> ? <span class="number">0</span> : value.hashCode());</span><br><span class="line">	&#125;</span><br><span class="line"><span class="comment">//计算hash值的</span></span><br><span class="line"><span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">hash</span><span class="params">(<span class="keyword">int</span> h)</span> </span>&#123;</span><br><span class="line">	h ^= (h &gt;&gt;&gt; <span class="number">20</span>) ^ (h &gt;&gt;&gt; <span class="number">12</span>);</span><br><span class="line">	<span class="keyword">return</span> h ^ (h &gt;&gt;&gt; <span class="number">7</span>) ^ (h &gt;&gt;&gt; <span class="number">4</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//搜索指定Hash在对应table中的索引</span></span><br><span class="line">	<span class="function"><span class="keyword">static</span> <span class="keyword">int</span> <span class="title">indexFor</span><span class="params">(<span class="keyword">int</span> h, <span class="keyword">int</span> length)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">return</span> h &amp; (length-<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//根据hash值，将key-value放在数组table的索引i位置上。</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">addEntry</span><span class="params">(<span class="keyword">int</span> hash, K key, V value, <span class="keyword">int</span> bucketIndex)</span> </span>&#123;</span><br><span class="line">	<span class="comment">//获取指定bucketIndex索引处的Entry</span></span><br><span class="line">	Entry&lt;K,V&gt; e = table[bucketIndex];</span><br><span class="line">	<span class="comment">//将新创建的Entry放入bucketIndex索引位置，并让新的Entry指向原来的Entry。</span></span><br><span class="line">	table[bucketIndex] = <span class="keyword">new</span> Entry&lt;&gt;(hash, key, value, e);</span><br><span class="line">	<span class="comment">//如果数组长度不够，就扩容</span></span><br><span class="line">	<span class="keyword">if</span> (size++ &gt;= threshold)</span><br><span class="line">	<span class="comment">//将table数组的长度扩展到原来的2倍</span></span><br><span class="line">	resize(<span class="number">2</span> * table.length);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h4 id="说明：-4"><a href="#说明：-4" class="headerlink" title="说明："></a>说明：</h4><blockquote>
+<p>&amp;是与运算符，将int转为二进制，只有两个位都是1，结果才是1。</p>
+</blockquote>
+<h4 id="小结："><a href="#小结：" class="headerlink" title="小结："></a>小结：</h4><p>从上面的源码可以看出，当我们向HashMap中添加一个元素时，先根据key的hashCode重新计算hash值，根据这个hash值得到这个元素在数组中的位置，也就是数组的下标，如果这个位置已经存放了其他元素，那么他就会以链表的方式存放，新加入的放在链头，最先加入的放在链尾，如果数组上该位置没有元素，就直接放到该位置上。</p>
+<h3 id="4-读取数据"><a href="#4-读取数据" class="headerlink" title="4.读取数据"></a>4.读取数据</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> V <span class="title">get</span><span class="params">(Object key)</span> </span>&#123;</span><br><span class="line"><span class="keyword">if</span> (key == <span class="keyword">null</span>)</span><br><span class="line">	<span class="keyword">return</span> getForNullKey();</span><br><span class="line"><span class="keyword">int</span> hash = hash(key.hashCode());</span><br><span class="line"><span class="keyword">for</span> (Entry&lt;K,V&gt; e = table[indexFor(hash, table.length)];</span><br><span class="line">		e != <span class="keyword">null</span>;</span><br><span class="line">		e = e.next) &#123;</span><br><span class="line">	Object k;</span><br><span class="line">	<span class="keyword">if</span> (e.hash == hash &amp;&amp; ((k = e.key) == key || key.equals(k)))</span><br><span class="line">		<span class="keyword">return</span> e.value;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="小结：-1"><a href="#小结：-1" class="headerlink" title="小结："></a>小结：</h4><p>当我们从HashMap中读取一个元素时，首先判断key是否为空，不为空就根据key计算hash值，根据hash值找到数组中对应位置的元素，然后通过key的equals方法，在对应位置的链表中找到需要元素的值。</p>
+<p>##HashMap 总结</p>
+<ul>
+<li>HashMap是数组和链表的结合体，允许插入null的key和value。</li>
+<li>HashMap是线程不安全的，采用Fail-Fast机制。</li>
+<li>HashMap进行数组扩容时，需要重新计算每个元素在数组中的位置，耗性能。</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+      <div>
+        <div id="wechat_subscriber" style="display: block; padding: 10px 0; margin: 20px auto; width: 100%; text-align: center">
+    <img id="wechat_subscriber_qcode" src="/images/qrcode_for_gh_dfc33bc3270f_258.jpg" alt="曹辰 wechat" style="width: 200px; max-width: 100%;">
+    <div>欢迎关注微信公共号 summerhins <br>不经常抽风性更新 | 挨踢民工 | 爱数码产品 | 爱黑莓 | 爱苹果 | 美剧痴迷者 | 音乐重度爱好者 | 高清下载控 | 不折腾不舒服 | 纠结 | 失眠 | EQ=0</div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>真诚赞赏，手留余香</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/微信图片_20190320223941.jpg" alt="曹辰 微信支付">
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/微信图片_20190320224051.jpg" alt="曹辰 支付宝">
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Java/" rel="tag"><i class="fas fa-tag"></i> Java</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div>
+	  <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    曹辰
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="https://caochenhins.github.io/2019/03/22/JavaEE基础知识学习----集合之HashMap/" title="JavaEE基础知识学习----集合之HashMap">https://caochenhins.github.io/2019/03/22/JavaEE基础知识学习----集合之HashMap/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章均采用 <a href="https://github.com/caochenhins" rel="external nofollow" target="_blank">OPEN</a> 许可协议，转载请注明出处！
+  </li>
+</ul>
+
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/03/22/JavaEE进阶知识学习----JavaNIO-4-NIO2-File类/" rel="next" title="JavaEE进阶知识学习----JavaNIO-4-NIO2-File类">
+                <i class="fas fa-chevron-left"></i> JavaEE进阶知识学习----JavaNIO-4-NIO2-File类
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/03/22/JavaEE基础知识学习----单例模式/" rel="prev" title="JavaEE基础知识学习----单例模式">
+                JavaEE基础知识学习----单例模式 <i class="fas fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+    <div class="comments" id="comments">
+      
+        <div id="gitment-container"></div>
+      
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+      <div id="sidebar-dimmer"></div>
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+	        <img class="site-author-image" itemprop="image" src="/images/getheadimg.png" alt="曹辰">
+            
+              <p class="site-author-name" itemprop="name">曹辰</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">132</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">26</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/caochenhins" target="_blank" title="GitHub">
+                      
+		      
+			<i class="fa-fw fab fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:ipod_nano@qq.com" target="_blank" title="E-Mail">
+                      
+		      
+			<i class="fa-fw fas fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://blog.csdn.net/caochenhins" target="_blank" title="CSDN">
+                      
+		      
+			<i class="fa-fw fab fa-cuttlefish"></i>CSDN</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="https://www.cnblogs.com/hins/" target="_blank" title="博客园">
+                      
+		      
+			<i class="fa-fw fas fa-book"></i>博客园</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+
+          
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap基本知识"><span class="nav-number">1.</span> <span class="nav-text">HashMap基本知识</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#概述"><span class="nav-number">1.1.</span> <span class="nav-text">概述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用方法"><span class="nav-number">1.2.</span> <span class="nav-text">使用方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用方法"><span class="nav-number">1.3.</span> <span class="nav-text">常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Object-put-Object-key-Object-value-添加方法"><span class="nav-number">1.3.1.</span> <span class="nav-text">1.Object put(Object key,Object value);添加方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明："><span class="nav-number">1.3.2.</span> <span class="nav-text">说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Object-remove-Object-key-移除方法"><span class="nav-number">1.3.3.</span> <span class="nav-text">2.Object remove(Object key);移除方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-void-putAll-Map-t-添加一个map"><span class="nav-number">1.3.4.</span> <span class="nav-text">3.void putAll(Map t);添加一个map</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-void-clear-清除数据"><span class="nav-number">1.3.5.</span> <span class="nav-text">4.void clear();清除数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-Object-get-Object-key-根据key取出value"><span class="nav-number">1.3.6.</span> <span class="nav-text">5.Object get(Object key);根据key取出value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-boolean-containsKey-Object-key-是否包含这个key，这里返回false。"><span class="nav-number">1.3.7.</span> <span class="nav-text">6.boolean containsKey(Object key);是否包含这个key，这里返回false。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#7-boolean-containsValue-Object-value-HasHMap是否包含这个value"><span class="nav-number">1.3.8.</span> <span class="nav-text">7.boolean containsValue(Object value);HasHMap是否包含这个value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明：-1"><span class="nav-number">1.3.9.</span> <span class="nav-text">说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#8-int-size-输出HashMap中键值对的个数。"><span class="nav-number">1.3.10.</span> <span class="nav-text">8.int size();输出HashMap中键值对的个数。</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#说明：-2"><span class="nav-number">1.3.11.</span> <span class="nav-text">说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#9-boolean-isEmpty-判断HashMap是否为空"><span class="nav-number">1.3.12.</span> <span class="nav-text">9.boolean isEmpty();判断HashMap是否为空</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#10-boolean-equals-Object-obj-比较两个Map是否相同"><span class="nav-number">1.3.13.</span> <span class="nav-text">10.boolean equals(Object obj);比较两个Map是否相同</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#11-Set-keySet-遍历HashMap中的所有Key"><span class="nav-number">1.3.14.</span> <span class="nav-text">11.Set keySet();遍历HashMap中的所有Key</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#12-Collection-values-遍历HashMap中的value"><span class="nav-number">1.3.15.</span> <span class="nav-text">12.Collection values();遍历HashMap中的value</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#13-Set-entrySet-遍历HashMap的键值对"><span class="nav-number">1.3.16.</span> <span class="nav-text">13.Set entrySet();遍历HashMap的键值对</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">1.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HashMap底层实现原理"><span class="nav-number">2.</span> <span class="nav-text">HashMap底层实现原理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-HashMap属性"><span class="nav-number">2.1.</span> <span class="nav-text">1.HashMap属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-HashMap构造方法"><span class="nav-number">2.2.</span> <span class="nav-text">2.HashMap构造方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说明：-3"><span class="nav-number">2.2.1.</span> <span class="nav-text">说明：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-添加数据方法"><span class="nav-number">2.3.</span> <span class="nav-text">3.添加数据方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#说明：-4"><span class="nav-number">2.3.1.</span> <span class="nav-text">说明：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#小结："><span class="nav-number">2.3.2.</span> <span class="nav-text">小结：</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-读取数据"><span class="nav-number">2.4.</span> <span class="nav-text">4.读取数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#小结：-1"><span class="nav-number">2.4.1.</span> <span class="nav-text">小结：</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fas fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">曹辰</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fas fa-chart-area"></i>
+    </span>
+    
+      <span class="post-meta-item-text">全站共计字数&#58;</span>
+    
+    <span title="全站共计字数">317.8k</span>
+  
+</div>
+
+
+
+
+
+
+
+<!--
+  <div class="footer-custom">Hosted by <a href="https://pages.coding.me" style="font-weight:bold">Coding Pages</a> & <a target="_blank" href="https://pages.github.com" style="font-weight:bold">GitHub Pages</a></div>
+-->
+
+        
+<div class="busuanzi-count">
+  <script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+  
+    <span class="site-uv">
+      <i class="fas fa-user"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_uv"></span>
+      
+    </span>
+  
+
+  
+    <span class="site-pv">
+      <i class="fas fa-eye"></i>
+      <span class="busuanzi-value" id="busuanzi_value_site_pv"></span>
+      
+    </span>
+  
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+        
+          <span id="scrollpercent"><span>0</span>%</span>
+        
+      </div>
+    
+
+    <div class="sidebar_wo">
+      <div id="leimu">
+        <img src="/images/b2t/leimuA.png" alt="雷姆" onmouseover="this.src='/images/b2t/leimuB.png'" onmouseout="this.src='/images/b2t/leimuA.png'" title="回到顶部">
+      </div>
+      <div class="sidebar_wo" id="lamu">
+        <img src="/images/b2t/lamuA.png" alt="雷姆" onmouseover="this.src='/images/b2t/lamuB.png'" onmouseout="this.src='/images/b2t/lamuA.png'" title="回到底部">
+      </div>
+    </div>
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+<!-- LOCAL: You can save these files to your site and update links -->
+    
+        
+        <link rel="stylesheet" href="https://aimingoo.github.io/gitmint/style/default.css">
+        <script src="https://aimingoo.github.io/gitmint/dist/gitmint.browser.js"></script>
+    
+<!-- END LOCAL -->
+
+    
+
+    
+      <script type="text/javascript">
+      function renderGitment(){
+        var gitment = new Gitmint({
+            id: window.location.pathname.substring(window.location.pathname.length-15,window.location.pathname.length), 
+            owner: 'caochenhins',
+            repo: 'caochenhins.github.io',
+            
+            lang: "" || navigator.language || navigator.systemLanguage || navigator.userLanguage,
+            
+            oauth: {
+            
+            
+                client_secret: '5ce0e65489e1f2cf20d40af22f574edc5d7396d4',
+            
+                client_id: '3e213716c71ed6f28dc0'
+            }});
+        gitment.render('gitment-container');
+      }
+
+      
+      renderGitment();
+      
+      </script>
+    
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fas fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="far fa-frown fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+<script>
+(function(){
+    var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';        
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+</script>
+
+
+  
+  
+
+  
+
+  
+
+  
+
+
+  
+<!-- 图片轮播js文件cdn -->
+<script src="https://cdn.bootcss.com/jquery-backstretch/2.0.4/jquery.backstretch.min.js"></script>
+
+<!-- 剪贴板js文件 -->
+<script type="text/javascript" src="/lib/zclip/clipboard.min.js"></script>
+
+<script>
+
+<!-- 头像挂件及自动刷新 -->
+
+
+</script>
+
+<!-- 自定义的js文件 -->
+<script type="text/javascript" src="/js/src/custom.js"></script>
+</body>
+</html>
