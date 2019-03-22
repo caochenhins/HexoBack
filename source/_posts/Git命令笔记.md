@@ -14,7 +14,7 @@ date: 2019-03-22 23:17:45
 git init
 git add .
 git commit -m "first commit"
-git remote add origin https://github.com/caochenhins/GitHexo.git
+git remote add origin https://github.com/caochenhins/HexoBack.git
 git push -u origin master
 
 ```
@@ -134,3 +134,75 @@ git add -u [path]表示 add to index only files modified or deleted and not thos
 
 git commit -am "提交"
 
+
+## Git push -u orign master 提示hint: not have locally. This is usually caused by another repository push
+
+一、情景
+1.在GitHub上创建一个仓库A，并且初始化了readme.md这个文档.
+2.在本地用Git Bash初始化仓库A(一开始没有从GitHub上拉下来).
+git init /* 初始化一个空的仓库*/
+3.在本地仓库新建一个文件 test.txt,并且提交到本地仓库.
+
+git add test.txt /* 把test.txt设为仓库跟踪文件 */ 
+git commit -m “测试第一次 test.txt” /* 提交文件并且追加备注 */
+
+4.把本地仓库提交到远程仓库master 分支
+
+git push git@github.com：用户名/仓库名 master 
+提交失败：not have locally. This is usually caused by another repository push
+
+二、原因
+本地仓库跟远程仓库的版本不一样导致的,因为执行在步骤1的时候，远程的版本库会有个“commit readme.md”这个操作记录,本地仓库是不知道你有这个提交的，也就是说这个记录没在本地仓库是不存在的，所以俩个版本是不一致的.
+三 、解决方法
+A). 先更新本地版本在提交
+
+利用 git pull 更新本地版本库.
+再 利用git push命令把本地仓库推送至远程仓库.
+B). 强制覆盖
+
+
+加上 -f 参数 强制覆盖 
+git push -f
+
+
+
+## git如何移除某文件夹的版本控制
+```
+目录结构如下
+project
+    bin
+    lib
+    src
+    ...... 
+执行如下的操作
+git add .
+git commit -m "add bin/ lib/ src/"
+git push origin master
+ 
+
+突然发现原来 lib 目录不需要提交到版本库,但是现在远程已经存在该目录,what should I do.（吐出去的东西还能收回来吗）
+
+万能的Git啊,help me！
+
+功夫不负有心人,找到了解决问题的方法,其实就是 git rm 的命令行参数。
+
+git rm 命令参数
+-n --dry-run 
+Don’t actually remove any file(s). Instead, just show if they exist in the index and would otherwise be removed by the command.
+-r 
+Allow recursive removal when a leading directory name is given. 
+--cached 
+Use this option to unstage and remove paths only from the index. Working tree files, whether modified or not, will be left alone.
+解决方法
+git rm -r -n --cached "bin/" //-n：加上这个参数，执行命令时，是不会删除任何文件，而是展示此命令要删除的文件列表预览。
+git rm -r --cached  "bin/"      //最终执行命令. 
+git commit -m" remove bin folder all file out of control"    //提交
+git push origin master   //提交到远程服务器
+此时 git status 看到 bin/目录状态变为 untracked
+
+可以修改 .gitignore 文件 添加 bin/ 并提交 .gitignore 文件到远程服务器,这样就可以不对bin目录进行版本管理了。
+
+以后需要的时候,只需要注释 .gitignore 里 #bin/ 内容,重新执行 git bin/ ,即可重新纳入版本管理。
+
+
+```
